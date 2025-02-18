@@ -20,12 +20,32 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         update() {
+            // Define the bounding box around the text (adjust based on your text size)
+            let textX = canvas.width / 2 - 200; // Center text
+            let textY = canvas.height / 3; 
+            let textWidth = 400;
+            let textHeight = 100;
+
+            // Collision detection
+            if (
+                this.x > textX &&
+                this.x < textX + textWidth &&
+                this.y > textY &&
+                this.y < textY + textHeight
+            ) {
+                // Reverse direction to simulate bouncing
+                this.speedX *= -1;
+                this.speedY *= -1;
+            }
+
             this.x += this.speedX;
             this.y += this.speedY;
             
+            // Keep particles within canvas bounds
             if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
             if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
         }
+
 
         draw() {
             ctx.fillStyle = "rgba(0, 255, 255, 0.8)";
@@ -43,10 +63,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(particle => {
+         // Update and draw particles
+         particles.forEach(particle => {
             particle.update();
             particle.draw();
         });
+
         requestAnimationFrame(animate);
     }
 

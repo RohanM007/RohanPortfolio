@@ -3,33 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="../styles/main.css">
-    <script src="../scripts/main.js" defer></script>
+    <title>Matrix Rain Intro</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            background: black;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        /* Matrix Background */
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+        }
+
+        /* Typewriter Effect */
+        .intro {
+            position: absolute;
+            width: 100%;
+            top: 40%;
+            font-size: 28px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid white;
+            display: inline-block;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav>
-        <div class="logo">MyPortfolio</div>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="portfolio.html">Portfolio</a></li>
-            <li><a href="chatbot.html">Chatbot</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </nav>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Welcome to My Portfolio</h1>
-        <p>I'm a passionate web developer skilled in React, Angular, and AI integrations.</p>
-        <a href="portfolio.html" class="btn">View My Work</a>
-    </section>
-    
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 MyPortfolio | All Rights Reserved</p>
-    </footer>
+    <!-- Matrix Background -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- Intro Text with Typewriter Effect -->
+    <div class="intro" id="intro-text"></div>
+
+    <script>
+        // Matrix Rain Effect
+        const matrixCanvas = document.getElementById("matrixCanvas");
+        const ctxMatrix = matrixCanvas.getContext("2d");
+        matrixCanvas.width = window.innerWidth;
+        matrixCanvas.height = window.innerHeight;
+
+        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        const fontSize = 16;
+        const columns = Math.floor(matrixCanvas.width / fontSize);
+        const drops = Array(columns).fill(1);
+
+        function drawMatrix() {
+            ctxMatrix.fillStyle = "rgba(0, 0, 0, 0.1)";
+            ctxMatrix.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+            ctxMatrix.fillStyle = "#00FF00";
+            ctxMatrix.font = fontSize + "px monospace";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctxMatrix.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        setInterval(drawMatrix, 50);
+
+        // Typewriter Effect
+        const text = "Hi, my name is Rohan and welcome to my portfolio.";
+        let i = 0;
+        const introText = document.getElementById("intro-text");
+
+        function typeWriter() {
+            if (i < text.length) {
+                introText.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100); // Adjust typing speed
+            } else {
+                setTimeout(redirectToHome, 2000); // Wait before redirecting
+            }
+        }
+
+        setTimeout(typeWriter, 1000); // Start typing after 1 sec
+
+        // Redirect to Home Page
+        function redirectToHome() {
+            document.body.style.transition = "opacity 1s";
+            document.body.style.opacity = "0";
+            setTimeout(() => {
+                window.location.href = "home.html";
+            }, 1000);
+        }
+    </script>
 </body>
 </html>

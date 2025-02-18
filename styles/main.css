@@ -5,7 +5,7 @@ body {
     padding: 0;
     font-family: Arial, sans-serif;
     color: white;
-    background: black;
+    background: rgb(66, 64, 64);
     overflow-x: hidden;
 }
 
@@ -22,10 +22,10 @@ body {
 /* Navbar */
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgb(34, 160, 160);
     position: fixed;
     width: 100%;
     top: 0;
@@ -51,7 +51,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: cyan;
+    color: rgb(67, 169, 169);
 }
 
 /* Hero Section */
@@ -92,5 +92,51 @@ nav ul li a:hover {
 footer {
     text-align: center;
     padding: 20px;
-    background: rgba(0, 0, 0, 0.8);
+    background: rgb(34, 160, 160);
 }
+
+
+/*Contact */
+#contact{
+    text-align: center;
+    padding: 50px;
+}
+
+#contact h2{
+    font-size: 28px;
+    margin-bottom: 50px;
+}
+
+#contact-form{
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#contact-form input,
+#contact-form textarea{
+    width:100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#contact-form button{
+    background-color: cyan;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    cursor:pointer;
+    transition:0.3s;
+
+
+}
+
+#contact-form button:hover{
+    background-color: white;
+}
+
+
+
