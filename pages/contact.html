@@ -1,12 +1,22 @@
 <section id="contact" class="section">
     <link rel="stylesheet" href="../styles/main.css">
     <script src="../scripts/main.js" defer></script>   
+    
     <h2>Want to get in touch?</h2>
     <form id="contact-form">
-        <input type="text" id="first-name" name="first-name" placeholder="First Name" required>
-       <input type = "text" id = "surname" name = "surname" placeholder= "Surname" required>
-        <input type="email" placeholder="Please enter your email" required>
-        <textarea placeholder="Your Message" required></textarea>
-        <button type="submit">Send Message</button>
+        <input type="text" id="name" name="name" placeholder="Name" required>
+        <input type="text" id="surname" name="surname" placeholder="Surname" required>
+        <input type="email" id="email" name="email" placeholder="Please enter your email" required>
+        <textarea id="message" name="message" placeholder="Your Message" required></textarea>
+        <button type="submit" onclick="sendMail()">Send Message</button>
     </form>
+
+    <!-- Loading EmailJS first, then the script -->
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script src="../scripts/contact.js" defer></script>  
+    <script type = "text/javascript">
+        (function(){
+            emailjs.init("oZ0wkoMp9t3767XnX");
+        })();
+    </script>
 </section>
